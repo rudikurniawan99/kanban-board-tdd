@@ -4,7 +4,7 @@ import { addList } from '../features/list/listSlice'
 
 const ListInput = () => {
 
-  const [isActive, setisActive] = useState(false)
+  const [isActive, setisActive] = useState(true)
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
   const onChange = (e) => {

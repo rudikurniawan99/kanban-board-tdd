@@ -6,24 +6,34 @@ describe('input list name', () => {
     cy.visit('http://192.168.1.13:3000')
   })
 
-  it('should display list input bar', () => {
-    cy.findByRole('button', /add list/i)  
-      .click()
-    cy.findByPlaceholderText(/add list name/i)
-      .should('be.visible')
-    cy.findByRole('button', /\+/i)
-      .should('be.visible')
-  })
+  // it('should display list input bar', () => {
+  //   cy.findByRole('button', /add list/i)  
+  //     .click()
+  //   cy.findByPlaceholderText(/add list name/i)
+  //     .should('be.visible')
+  //   cy.findByRole('button', /\+/i)
+  //     .should('be.visible')
+  // })
 
   it('should display inputed list', () => {
     const listTitle = 'List Title 1'
-    cy.findByRole('button', /add list/i)  
-      .click()
+    // cy.findByRole('button', /add list/i)  
+    //   .click()
     cy.findByPlaceholderText(/add list name/i)
       .type(listTitle)
-    cy.findByRole('button', /\+/i)
+    cy.findByRole('button', { name: /\+/i })
       .click()
     cy.contains(listTitle)
+  })
+
+  it('should delete list item', () => {
+    const listTitle = 'List Title 0'
+    cy.contains(listTitle)
+      .parent()
+      .findByRole('button')
+      .click()
+    cy.contains(listTitle)
+      .should('not.exist')
   })
 
 })
