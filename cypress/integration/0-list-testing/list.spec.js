@@ -21,7 +21,9 @@ describe('input list name', () => {
     //   .click()
     cy.findByPlaceholderText(/add list name/i)
       .type(listTitle)
-    cy.findByRole('button', { name: /\+/i })
+    cy.findByPlaceholderText(/add list name/i)
+      .parent()
+      .findByRole('button', { name: /\+/i })
       .click()
     cy.contains(listTitle)
   })
@@ -34,6 +36,12 @@ describe('input list name', () => {
       .click()
     cy.contains(listTitle)
       .should('not.exist')
+  })
+
+  context('card test', () => {
+    it('display card', () => {
+      cy.contains(/card/i)
+    })
   })
 
 })

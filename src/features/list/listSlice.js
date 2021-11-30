@@ -5,7 +5,13 @@ import { v4 as uuidv4 } from "uuid"
 const initialState = [
   {
     id: uuidv4(),
-    title: 'List Title 0'
+    title: 'List Title 0',
+    cards: [
+      {
+        id: uuidv4(),
+        title: 'card 0'
+      }
+    ]
   }
 ]
 
@@ -17,7 +23,8 @@ export const listSlice = createSlice({
       const { title } = action.payload
       state.push({
         id: uuidv4(),
-        title
+        title,
+        cards: []
       })
     },
     removeList: (state, { payload }) => {
@@ -31,6 +38,10 @@ export const listSlice = createSlice({
       })
 
       state.splice(listIndex, 1)
+    },
+    addCard: (state, { payload }) => {
+      const { listId, title } = payload
+      
     }
   }
 })
