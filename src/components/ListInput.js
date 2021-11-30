@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addList } from '../features/list/listSlice'
 
 const ListInput = () => {
 
   const [isActive, setisActive] = useState(false)
   const [input, setInput] = useState('')
+  const dispatch = useDispatch()
   const onChange = (e) => {
     setInput(e.target.value) 
   }
@@ -21,7 +24,9 @@ const ListInput = () => {
           <button
             className="py-2.5 px-4 bg-blue-600 hover:bg-blue-600 text-white rounded-br-md rounded-tr-md" 
             onClick={() => {
-              console.log(input)
+              dispatch(addList({
+                title: input
+              }))
               setInput('')
             }}
           >+</button>
