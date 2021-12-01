@@ -41,11 +41,30 @@ export const listSlice = createSlice({
     },
     addCard: (state, { payload }) => {
       const { listId, title } = payload
-      
+      let listIndex 
+      let newList
+      state.map((list, index) => {
+        if(list.id === listId){
+          listIndex = index 
+          newList = {
+            id: list.id,
+            title: list.title,
+            cards: list.cards
+          }
+        }
+      }) 
+
+      newList.cards.push({
+        id: uuidv4(),
+        title
+      })
+
+      state.splice(listIndex, 1, newList)
+
     }
   }
 })
 
-export const { addList, removeList } =listSlice.actions
+export const { addList, removeList, addCard } =listSlice.actions
 
 export default listSlice.reducer

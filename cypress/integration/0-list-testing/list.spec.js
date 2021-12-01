@@ -26,6 +26,7 @@ describe('input list name', () => {
       .findByRole('button', { name: /\+/i })
       .click()
     cy.contains(listTitle)
+      .should('exist')
   })
 
   it('should delete list item', () => {
@@ -54,7 +55,7 @@ describe('input list name', () => {
         .parent()
         .findByRole('button', { name: /\+/i })
         .click()
-      btn.contains(cardTitle)
+      cy.contains(cardTitle)
         .should('exist')
 
     })

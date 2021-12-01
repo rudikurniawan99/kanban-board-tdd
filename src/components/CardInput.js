@@ -1,7 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { addCard } from '../features/list/listSlice'
 
 const CardInput = ({listId}) => {
   const [isOpen, setIsOpen] = React.useState(false)
+  const [input, setInput] =React.useState('')
+  const dispatch = useDispatch()
 
   return (
     <div className="">
@@ -11,8 +15,21 @@ const CardInput = ({listId}) => {
             className="py-0.5 px-2 border border-black border-opacity-10"
             placeholder="Add card"
             type="text"
+            onChange={(e) => {
+              setInput(e.target.value)
+            }}
           />
-          <button className="py-3 px-5 bg-blue-600 text-white rounded-md">+</button>
+          <button 
+            className="py-3 px-5 bg-blue-600 text-white rounded-md"
+            onClick={() => {
+              dispatch(addCard({
+                listId,
+                title: input
+              }))
+              setInput('')
+              setIsOpen(false)
+            }}
+          >+</button>
         </div>
       ):(
         <button
