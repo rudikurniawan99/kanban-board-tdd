@@ -42,6 +42,22 @@ describe('input list name', () => {
     it('display card', () => {
       cy.contains(/card/i)
     })
+    it('add card to a list', () => {
+      const cardTitle = 'card 1'
+      const btn = cy.findByRole('heading', { name: /list title 0/i })
+        .parents('.p-4')
+      btn.findByRole('button', { name: /add card/i })
+        .click()
+      btn.get('input:last')
+        .type(cardTitle)
+      btn.get('input:last')
+        .parent()
+        .findByRole('button', { name: /\+/i })
+        .click()
+      btn.contains(cardTitle)
+        .should('exist')
+
+    })
   })
 
 })
